@@ -11,13 +11,6 @@ auth_router = APIRouter()
 
 
 
-# def create_access_token(data: dict):
-#     to_encode = data.copy()
-#     print(to_encode)
-#     expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-#     to_encode.update({"exp": expire})
-#     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
-
 @auth_router.post("/signup")
 def signup(data: CreateUser, db: Session = Depends(get_db)):
     if not data.email.endswith("@srmist.edu.in"):
@@ -32,7 +25,7 @@ def signup(data: CreateUser, db: Session = Depends(get_db)):
             detail="Email already registered"
         )
     
-    if data.email == 'harsh@srmist.edu.in' and data.password == 'harshan':
+    if data.email == 'harshan@srmist.edu.in' and data.password == 'harshan':
         create_user(db, data.email)
         access_token = create_access_token(data.email)
         return {"access_token": access_token, "token_type": "bearer"}
@@ -55,7 +48,7 @@ def login(data: UserLogin, db: Session = Depends(get_db)):
         )
     user = get_user_by_email(db, data.email)
     print(user)
-    if not user :  # In production, use proper password hashing
+    if not user :  
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect email or password"

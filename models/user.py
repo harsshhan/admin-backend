@@ -7,14 +7,9 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, unique=True, index=True)
 
-    # def __dict__(self):
-    #     return {
-    #         "id": self.id,
-    #         "email": self.email
-    #     }
 
     @property
-    def dict(self):  # Changed to property instead of method
+    def dict(self): 
         return {
             "id": self.id,
             "email": self.email
