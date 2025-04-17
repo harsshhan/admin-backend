@@ -1,3 +1,5 @@
+from pydantic.main import BaseModel
+from models import folder
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from datetime import datetime
 from db.database import Base
@@ -12,3 +14,6 @@ class File(Base):
     mime_type = Column(String)
     folder_id = Column(Integer, ForeignKey("folders.id"), nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
+
+    
+    

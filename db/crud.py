@@ -63,3 +63,4 @@ def get_all_child_folders(db: Session, folder_id: int):
         folders.extend(get_all_child_folders(db, child.id))
     
     return folders
+
